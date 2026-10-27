@@ -93,4 +93,3 @@ python3 scripts/render_preview.py assets/example-answer.json --output-dir ./outp
 Run `python3 -m unittest discover -s scripts -p 'test_*.py'` when changing the renderer. This V3 is a portable **downloadable draft** until installed by the user; do not call it already installed. Do not claim pixel-identical ChatGPT reproduction, guaranteed native widgets in any IDE, or browser QA based solely on static tests.
 
 For Codex / Claude Code setup and cross-platform behavior checks, see [installation and evaluations](references/install-and-evals.md).
-
