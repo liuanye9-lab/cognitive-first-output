@@ -1,95 +1,69 @@
 ---
 name: cognitive-first-output
-description: Default cognitive-first output for Codex, Claude Code, and other Agents. Use for substantive explanations, decisions, learning, diagnosis, plans, and status updates. Produce a concise native-chat answer plus a portable visual HTML preview by default when file output is available; emphasize key takeaways, neutral-gray information cards, and functional diagnostic choices. Gracefully fall back to Markdown when preview rendering is unavailable.
+description: Default inline cognitive-first answer design for Codex, Claude Code, and other Agents. Use for explanations, analyses, decisions, learning, diagnoses, plans, and reports. Present the complete result directly inside the current conversation with concise hierarchy, selective bold, neutral information groups and genuine native question controls only when available. Never automatically generate a separate HTML page; export only when explicitly requested.
 ---
 
-# Cognitive-First Output · Lay
+# Cognitive-First Output · Lay · V4
 
-> V3 visual contract: use the [screenshot-grounded analysis and spacing tokens](references/visual-audit-and-tokens.md) for portable HTML preview. Values are inferred implementation specifications, **not official ChatGPT CSS**.
+## First priority: **the answer is the conversation**
 
-## Goal
+**Default result: a complete response visible in this Agent's current message.**
 
-Make the next **judgment or action** obvious within five seconds, while preserving accurate evidence and optional depth. Apply as the default presentation layer regardless of domain. Substance, safety, accuracy, and explicit user format requests override style.
+Do not routinely create a standalone HTML file, export a JSON answer document, start a web server, insert raw HTML/CSS/JS into Markdown, open a preview tab, or send the user to an artifact link to read an ordinary answer. Even a complex answer must be fully understandable **inside the Agent conversation**.
 
-## Core contract: scan first, understand second
+Installing this Skill changes output decisions, **not** the UI capabilities of a Codex terminal, Claude Code, browser, IDE, or ChatGPT client. Use only genuine capabilities actually exposed by the current host. [Native surface contract](references/native-surface-contract.md) provides platform-specific routing and evaluation.
 
-1. **Fast layer:** Lead with one plain-language conclusion, decision, or question. Highlight the truly important phrase; use no more than 1–3 first-level ideas for a typical response.
-2. **Slow layer:** Explain first-principles causes, important evidence, uncertainty, exceptions, and alternatives to the depth needed. Separate facts from inferences.
-3. **Action layer:** On actionable tasks, give the next small action and observable completion signal. In explorations, ask one purposeful question rather than inventing a plan.
-4. **Progressive depth:** Prefer a compact first screen and deeper material on demand. Never delete essential caveats or safety information for brevity.
+## The two cognitive layers
 
-Every visual accent should clarify one thing: **What matters? What relates? What changes? What do I do?**
+1. **Fast reading:** Begin with the one practical conclusion, decision, or next question. Emphasize at most the most consequential phrase.
+2. **Slow reading:** Give just enough cause, evidence, assumptions, counterargument and detail to let the user trust and apply it.
+3. **Next step:** State an action and observable outcome for execution tasks; ask one question only when its answer changes the next step.
+4. Do not mechanically label every reply “fast thinking” or “slow thinking.” Scale length and structure to the request. Facts, caveats and safety-critical limitations remain visible.
 
-## Choose the smallest useful visual
+## Inline layout
 
-| Need | Treatment | Avoid |
+| Information need | First choice inside the message | Fallback |
 | --- | --- | --- |
-| One judgment or mental task | Large, concise statement with **one emphasized phrase** | Bold-heavy prose |
-| 2–5 labeled facts or memory slots | **Soft neutral-gray card**, short labels and distinct values | Dense paragraphs |
-| Old vs new, comparison | Paired cards or a compact table | Repeated prose |
-| 3+ dependent stages | Stacked step cards; a diagram only if branching/relations benefit | Decorative arrows |
-| A meaningful diagnosis or quiz | Native selectable options and a submit action with tailored follow-up | Fake text-only buttons |
-| Data trends or spatial relationships | Accurate chart or map when available | Invented numbers or ornamental visuals |
-| Simple conversational answer | Plain language | Forced cards, headings, quizzes |
+| Short fact | One clear sentence, selective bold | Plain text |
+| 2–5 related facts | Real native pale-gray information group **if supported by this host** | Compact labeled list, small table or blockquote |
+| Alternatives or exact comparison | Native comparison group or short table | Labeled bullets |
+| Three or more ordered actions | Compact numbered steps; flow only when relationships need it | Numbered list |
+| Diagnostic question | Real native question tool/component when available | A/B/C text response in next turn |
+| Optional deep explanation | Native disclosure when available and appropriate | Small heading, paragraph, or invitation to expand |
 
-## Signature pattern: soft-gray working-memory block
+**Hierarchy rules**
 
-- Use a pale neutral-gray surface, subtle boundaries, ample padding, high-contrast values, muted but readable labels. Do not communicate status by color alone.
-- Prefer **unboxed explanation** and a single gray information object when it helps. Avoid turning each paragraph, step, or sentence into a card.
-- Group **2–5 semantically related** items. Prefer `Label → value`, e.g. `对象 → scientists`, `动作 → abandon a theory`, `限制 → after 2015; why`.
-- Give values greater weight than labels; do not overuse bold, emoji, bright accents, or heavy borders.
-- Split separate tasks into separate blocks. Avoid nested cards or a card for every sentence.
-- If card backgrounds are unavailable, degrade to a compact table, labeled list, or blockquote. Do not promise a visual effect the runtime cannot produce.
+- Place the answer above lengthy context. Keep an ordinary response to 1–3 meaningful sections.
+- Use short paragraphs, blank lines for topic shifts, and bold for key *phrases*, not entire paragraphs.
+- Most explanation stays unboxed. Reserve a gray card for a bounded, memorable information object rather than decorating every section.
+- Distinguish fact, inference, limitation, and recommended action. Keep evidence close to its claim.
+- Never claim Markdown sets exact font size, 14px radius, neutral background or button behavior. The host owns rendering.
+- Respect explicit output format requests, accessibility, screen reader semantics, phone readability, and platform tool instructions.
 
-## Signature pattern: diagnostic choices
+## True native interaction
 
-Use questions when the user's answer **changes the next teaching step, explanation, or diagnosis**.
+Only ask a multiple-choice question if the reply materially affects teaching, diagnosis, prioritization or implementation.
 
-1. Ask **one question at a time** with 2–4 distinct options. Ask only after providing enough context.
-2. Use real native radio/checkbox controls when available; let the user select and submit. Do not preselect an answer in a way that biases the diagnosis.
-3. Adapt the next response to the actual selection. Self-reports are not proof; propose a short behavior test when necessary.
-4. Keep labels visible, taps comfortable, and text readable on a phone. No inert or merely decorative controls.
-5. For text-only agents, number the options and invite `A`, `B`, etc. Never imply text is a functioning button.
+1. Ask **one question** with 2–4 mutually clear options.
+2. If the current host actually offers a question input tool or rich controls, use that mechanism; follow all host-specific tool restrictions. Codex host integrations may expose request-user-input and Claude Code may expose AskUserQuestion. **Do not assume either tool exists in every session.**
+3. If no true native control is available, list options in the reply and say “回复 A/B/C”. Do not invent clickable buttons, use fake HTML forms or create a browser quiz automatically.
+4. After a selection, genuinely tailor the next turn. A static HTML page cannot post a selection to an Agent chat unless separately integrated.
+5. If executing an already clear task, act without interrupting for a decorative question.
 
-## Response workflow
+## Output decision procedure
 
-1. **Identify intent:** answer, explain, decide, diagnose, execute, or practice. Respect requested format and depth.
-2. **Find the decision unit:** the one sentence the reader should retain; what can wait?
-3. **Assign cognitive layers:** conclusion → reasoning → action/question. Remove repetitive framing.
-4. **Select mode:** plain, gray information block, comparison, process, or interactive question; choose by utility, not novelty.
-5. **Adapt to platform:** keep the native answer concise and, for substantive responses with file-writing capability, generate a portable visual preview by default using the shared data contract below. If output files are unavailable, use clean Markdown/plain text; never fake controls.
-6. **Verify:** Can someone skim the first screen on a phone, repeat the conclusion, and know the next step? Do actual choices work? Do visuals genuinely help?
+Before finalizing, check:
 
-## Guardrails
+1. **Can the user read the substantive result immediately in this message?** If no, revise.
+2. Does every visual container improve orientation or memory? If no, remove it.
+3. Am I about to make a file only because the old V3 skill said to? If yes, **do not make it**.
+4. Is a rich control confirmed in this host? If no, choose the transparent text fallback.
+5. Are uncertainty and evidence preserved? If no, revise.
 
-- **Clarity over spectacle:** skip visuals for short answers and avoid excessive title sizes, colorful badges, and ornament.
-- **Truth over compression:** show decision-critical uncertainties, risks, caveats, and evidence.
-- **Action over unnecessary questions:** do not turn an explicit execution request into a quiz. Ask only when an answer materially changes the work or when coaching requires it.
-- **Accessibility:** contrast, reading order, text labels, no color-only meanings, avoid horizontal mobile overflow.
-- **Evidence:** cite reliable sources as appropriate; distinguish observations, interpretations, and tests.
-- **Default reach:** A Skill by itself cannot automatically govern every platform. Put [the global rule](assets/default-agent-rule.md) into each target Agent's base instructions as well.
+## Optional separate HTML / Markdown exports
 
-For concrete examples and self-tests, see [Patterns and tests](references/patterns-and-tests.md).
+**Only if the user explicitly requests a separate HTML/webpage/downloadable preview**, read [portable export instructions](references/dual-mode-contract.md). Use the example JSON in assets/example-answer.json and scripts/render_preview.py to generate standalone HTML and Markdown. This maintains the previous V3 exporter as an **opt-in** feature, not the default answer channel.
 
-## Default dual-mode preview (V3)
+The exported HTML supports pale-gray cards and local interactive single-choice feedback; this does **not** mean the HTML is embedded in Codex/Claude Code chat. Never claim pixel-identical ChatGPT rendering or automatically transmit its selection back to the Agent.
 
-Use the [dual-mode output contract](references/dual-mode-contract.md) for Codex, Claude Code, and any Agent that can create files:
-
-1. Answer briefly in native chat so the result is useful without opening anything.
-2. For substantive explanation, comparison, workflow, or practice, prepare one JSON answer document following the bundled [example](assets/example-answer.json). Use relevant blocks only.
-3. Generate both a standalone interactive HTML preview and Markdown fallback:
-
-```bash
-python3 scripts/render_preview.py assets/example-answer.json --output-dir ./output
-```
-
-4. Provide a working link or absolute path to the HTML preview in the Agent's supported format. The HTML defaults to a white page, readable narrow column, deliberate typographic spacing, **selective** strong or inline gray highlighting, soft-gray cards, and optional functional single-question choices. Keep it self-contained and usable offline.
-5. If a genuine diagnostic question is appropriate, show 2–4 choices with feedback after submission. Do not add choices to simple factual answers or assume a static HTML form transmits the selection back into a chat session.
-6. If file creation or preview display is unavailable, render the same data as Markdown without fake UI buttons.
-
-7. For visible emphasis in the input document, use `**important phrase**` (strong) or `==important phrase==` (subtle gray inline highlight). Both are escaped safely in HTML; gray highlighting becomes **bold** in the Markdown fallback. Use no more than one or two emphasized fragments per short paragraph.
-8. `facts`, `steps`, `choice`, and `text` remain supported. Use `callout` sparingly for a compact gray principle; use `details` only for *optional* explanation that can safely stay collapsed. Preserve essential risks and conditions in visible text.
-
-Run `python3 -m unittest discover -s scripts -p 'test_*.py'` when changing the renderer. This V3 is a portable **downloadable draft** until installed by the user; do not call it already installed. Do not claim pixel-identical ChatGPT reproduction, guaranteed native widgets in any IDE, or browser QA based solely on static tests.
-
-For Codex / Claude Code setup and cross-platform behavior checks, see [installation and evaluations](references/install-and-evals.md).
+For examples see [patterns and tests](references/patterns-and-tests.md). For layout inspiration see [visual audit](references/visual-audit-and-tokens.md); those approximate pixels apply to explicitly exported HTML only. For setup and acceptance tests see [install and eval](references/install-and-evals.md).

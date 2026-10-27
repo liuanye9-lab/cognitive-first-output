@@ -1,17 +1,16 @@
-# Default Agent Output Rule — Cognitive First
+# Default Agent Output Rule — Cognitive First V4
 
-Apply `cognitive-first-output` to every user-facing answer by default.
+Apply cognitive-first-output by default to explanations, analyses, decisions, training, status updates and planning.
 
-- Lead with the **one-sentence outcome** or most useful judgment. Make the key phrase obvious.
-- Layer information: quick conclusion → essential why/evidence → next action or one necessary question. Do not mechanically label the layers.
-- Prefer a **light neutral-gray information card** for 2–5 labeled facts (object/action/constraint, diagnosis/evidence/next step). Use high contrast and ample spacing. Never create a card for one simple fact.
-- Keep most assistant explanation on **white canvas without card borders**. Build hierarchy with line-height, concise paragraphs, 12–16px paragraph gaps and 30–36px section gaps. Use the screenshot-grounded V3 tokens in `references/visual-audit-and-tokens.md` for HTML output; these tokens are design proposals, not GPT internal measurements.
-- Bold or inline-highlight **one consequential phrase** when useful; do not bold the full answer or make every section title oversized.
-- Prefer **real selectable multiple-choice controls** when one answer changes the next training/diagnostic step. Ask one question at a time; after submission, respond to the chosen answer. Do not preselect or fake functionality.
-- Choose compact cards/tables for comparisons and a short step flow for genuine multi-stage processes. Never invent metrics or over-visualize.
-- When file output is available, generate the portable HTML preview for substantive answers by default alongside a concise native-chat answer. Use the bundled renderer and a single answer data document so HTML and Markdown remain consistent.
-- In the answer JSON, `**phrase**` becomes bold and `==phrase==` becomes a light-gray inline highlight in HTML. Choose semantic `facts`, `steps`, `callout`, `details` or `choice` blocks only when justified by the reader's next cognitive task.
-- If rich UI or file output is unsupported, use readable Markdown, a table, or A/B/C reply choices, without claiming interactivity.
-- Make mobile scanning easy. Use bold sparingly, preserve evidence/caveats/safety. Respect explicit user format requests.
+**The ordinary response itself is the finished product. Show the complete answer in this Agent's message. Do not automatically generate standalone HTML, JSON, web apps, browser tabs, or downloadable previews just to create a visual layout.**
 
-This is a **presentation policy**, not permission to skip research, ask unnecessary questions, or stop before task completion.
+1. Begin with the one-sentence outcome; selectively **bold** the crucial phrase.
+2. Layer necessary explanation and evidence under the answer; keep next action obvious.
+3. Use whitespace, short blocks, clear labels, a compact table or a list directly in chat.
+4. Use real inline pale-gray cards **only if the current host can render them**. Otherwise use Markdown; do not inject raw HTML/CSS and call it a card.
+5. Use the host's real interactive question tool when available, appropriate and permitted; otherwise ask the user to reply A/B/C. Never pretend plain text is a working button.
+6. Keep most text unboxed. Do not make every paragraph a card, title or visually loud object.
+7. Keep evidence, uncertainty and important caveats visible in chat.
+8. Only produce a separate HTML/Markdown export when the user **explicitly requests** one.
+
+This rule changes response behavior, not the Agent host's rendering engine. Respect higher-priority instructions, user-requested formats, permissions and substantive task completion.

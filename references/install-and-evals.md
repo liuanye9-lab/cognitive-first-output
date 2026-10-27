@@ -1,49 +1,39 @@
-# Install and evaluate in Codex / Claude Code
+# Install and evaluate · V4 inline-first
 
-## Principle: separate the skill from the host renderer
+## Deployment
 
-The Skill sets an answer structure; the host controls native chat rendering. In a terminal, Markdown never magically becomes ChatGPT's browser-only controls. The bundled Python CLI creates a portable, standalone HTML companion with working **local** radio-choice feedback; it cannot automatically post that answer into the Agent conversation.
+1. Extract the ZIP. One cognitive-first-output folder contains SKILL.md, assets, references and scripts.
+2. **Replace the older V3 skill** in the location supported by your current Agent. Avoid keeping two copies with identical skill names; the runtime may select the wrong version.
+3. Merge, rather than overwrite, assets/default-agent-rule.md into the project's AGENTS.md (Codex) or CLAUDE.md (Claude Code) if you require this style for all tasks. Check precedence against higher-priority instructions.
+4. Reload or refresh the Agent's skills as supported by its client. Installing a skill alone may not trigger it automatically for every reply.
+5. Verify the actual response in its **current chat window**, not an HTML preview in a browser.
 
-## Install
+## Behavioral acceptance tests (run in actual Codex / Claude Code)
 
-1. Extract the ZIP. It contains one folder `cognitive-first-output/` with `SKILL.md`, `scripts/`, `assets/`, and `references/`.
-2. Move that folder into a **supported skill location for your installed Agent version**. Codex and Claude Code support Agent Skills with `SKILL.md` and resource folders; check their current official docs for location and reload behavior. Claude Code documents project `.claude/skills/<skill-name>/SKILL.md` and personal `~/.claude/skills/<skill-name>/SKILL.md`.
-3. Add or merge the content of `assets/default-agent-rule.md` into your Agent's standing instruction file (project `AGENTS.md` for Codex or `CLAUDE.md` for Claude Code) if you want this preference applied by default across tasks. **Do not overwrite** existing instructions or project policy. Merely installing a skill doesn't guarantee invocation every turn.
-4. In the Skill folder run `python3 -m unittest discover -s scripts -p 'test_*.py' -v`.
-5. In an Agent session, ask: "用 cognitive-first-output 回答一个简短问题，再解释一个需要步骤的难题，附网页预览。" Confirm correct restraint, functioning file path, and full native-chat answer.
-
-## Visual and interaction manual QA
-
-Open `assets/example-answer.html` locally in a browser (only where local HTML preview is supported):
-
-| Test | Expected result |
+| User prompt | Required result |
 | --- | --- |
-| 360px width | Single column, readable typography, no horizontal scrolling, options wrap |
-| 768px and 1440px widths | Content stays ~720px max; generous whitespace; cards not stretched |
-| First 5 seconds | Main takeaway readable without deciphering a full report |
-| Select B | Radio becomes selected; submit becomes enabled |
-| Submit B | Only B's tailored feedback appears in the page |
-| Select C after B | Previous feedback disappears until C submission |
-| Keyboard Tab / Space | Focus remains obvious; radio choices work without mouse |
-| Screenreader semantics | Heading order, fieldset legend, labeled radio, live feedback |
+| “法国的首都是哪里？” | Single short response; no file, preview, quiz |
+| “用第一性原理解释雅思阅读定位” | Conclusion + evidence + next step entirely in the current Agent message; no HTML/JSON file |
+| “用灰色卡片总结对象、动作、限制” | Native card only if host supports it, else an inline labeled list/table; no external link |
+| “出一道判断我注意力问题的选择题” | Native question tool if available; otherwise A/B/C text and genuine next-turn response |
+| “用纯文本回答” | Plain text wins, no card or file |
+| “专门制作一个可单独打开的 HTML 交互页面” | **This case only:** export requested HTML/Markdown and give links |
 
-Do not claim the browser checks passed unless a human or permitted browser automation actually performed them. Static unit tests exercise generated HTML and deterministic JavaScript contracts, not pixels or real clicks.
+## Known platform boundary
 
-## Behavior eval prompts
+- Host display determines typography, spacing, cards, and interactivity. The Skill cannot force exact ChatGPT widgets into a terminal or IDE.
+- Codex App Server documents an experimental user-input request tool in supported hosts; do not assume it exists in every session.
+- Claude Code documents AskUserQuestion; Claude Code Desktop can preview an app in a browser pane, distinct from native message HTML.
+- The optional web renderer remains a standalone file. Its radio selection only updates the web page and never automatically replies to the Agent.
 
-| Input | Pass condition |
-| --- | --- |
-| "法国首都是哪里？" | Short plain answer, no compulsory report/card/quiz |
-| "用第一性原理解释雅思定位和理解" | 1-line conclusion → minimal steps → optional detail, short native answer, HTML companion when allowed |
-| "我定位后忘题干，是哪一类？" | At most one useful 2–4-option diagnosis, tailored feedback |
-| "只用纯文本给我" | Follows explicit format; no forced HTML |
-| "写一个有风险的决定方案" | Critical constraints visible, never hidden only in collapsible details |
-| "现在无法写文件" | Honest Markdown fallback; no claimed interactive button |
-| "把 `<script>` 当标题显示" | Literal escaped content, never executable HTML injection |
+See native-surface-contract.md for decision rules and official documentation references.
 
-## Limitations
+## Exporter regression tests
 
-- No official ChatGPT CSS or design tokens are bundled; values are informed visual approximations from a downscaled user screenshot.
-- Generated HTML is self-contained and does not require a network connection; **in-page** feedback works without an Agent session.
-- Exact host UI, live in-chat interactions, and auto-opening of file previews depend on the Codex / Claude Code client and permissions.
-- The Agent should provide a native answer even if HTML creation, browser preview, or optional script execution fails.
+In the Skill root:
+
+```bash
+python3 -m unittest discover -s scripts -p 'test_*.py' -v
+```
+
+These are code and static-policy tests. They cannot prove what the host visually renders, that a particular question tool is available, or that a real user interaction has been clicked. Perform the six manual behavioral evaluations above in the actual target host before claiming native UI parity.
