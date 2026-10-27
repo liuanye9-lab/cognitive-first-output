@@ -1,4 +1,4 @@
-# Native surface contract · conversation-first V4
+# Native surface contract · conversation-first V4.1
 
 ## Objective
 
@@ -24,6 +24,16 @@ Make the response itself the deliverable. The answer must not depend on a browse
 - Interactive Claude Code sessions may offer AskUserQuestion. Use it only when actually available and the answer changes the workflow.
 - Claude Code Desktop can preview **running applications** in a browser pane; that is a separate app preview, not proof of custom inline HTML components in the Agent response.
 - Claude Code CLI is terminal-first. Use readable direct output; never automatically create a web page for an ordinary answer.
+
+### Doubao Work: confirmed inline renderer route
+
+In this user's conversation, the user confirmed a static renderer card was visible and accepted the later composition sample as the right direction. This is user-reported evidence for this session, not a guarantee for every future session or client.
+
+1. Read the current doubao-visualization Skill and the relevant renderer contract when applicable. Use the exact host-declared `html type="renderer"` fenced wrapper; ordinary raw HTML is not equivalent.
+2. Compose meaningful content inside the message; do not write an HTML file, start a server or open a browser just to style the response. Prefer a transparent, natural-height root and mostly unboxed prose.
+3. If rendering fails or the host route is absent, keep the substantive answer available in Markdown. Do not call a separate browser page an in-chat preview.
+4. Use the native question tool for a decision-changing question. Static card visibility does not prove script execution, button clicks or that an in-page form sends answers to chat.
+5. See [conversation composition](conversation-composition.md) for rhythm and the approved example. Proposed font and spacing values are implementation choices, not official ChatGPT measurements.
 
 ### ChatGPT or another UI-enabled host
 

@@ -1,9 +1,9 @@
-# Install and evaluate · V4 inline-first
+# Install and evaluate · V4.1 conversation composition
 
 ## Deployment
 
 1. Extract the ZIP. One cognitive-first-output folder contains SKILL.md, assets, references and scripts.
-2. **Replace the older V3 skill** in the location supported by your current Agent. Avoid keeping two copies with identical skill names; the runtime may select the wrong version.
+2. **Replace the older V3/V4 skill** in the location supported by your current Agent. Avoid keeping two active copies with identical skill names; the runtime may select the wrong version. Preserve rollback outside active skill roots or in version control.
 3. Merge, rather than overwrite, assets/default-agent-rule.md into the project's AGENTS.md (Codex) or CLAUDE.md (Claude Code) if you require this style for all tasks. Check precedence against higher-priority instructions.
 4. Reload or refresh the Agent's skills as supported by its client. Installing a skill alone may not trigger it automatically for every reply.
 5. Verify the actual response in its **current chat window**, not an HTML preview in a browser.
@@ -27,6 +27,15 @@
 - The optional web renderer remains a standalone file. Its radio selection only updates the web page and never automatically replies to the Agent.
 
 See native-surface-contract.md for decision rules and official documentation references.
+
+## V4.1 composition acceptance
+
+- User feedback in this conversation: the original isolated card was unsatisfactory; a revised reply with a concrete judgment, mostly unboxed explanation and one key-boundary card was accepted as the right direction. This is not full behavioral or cross-client acceptance.
+- Test ordinary facts, substantive explanation, a comparison, uncertainty, a clear execution request and explicit plain text. Do not force each into the same three-section template.
+- For the illustrative customer-summary case, preserve “考虑一下” as tentative; never rewrite it as “确认采购”. A next action should make the verification criterion visible.
+- In the actual host, check the first-screen judgment, selective emphasis, one bounded object, wrapping and substantive completeness. Native questions need a real response and subsequent adaptation.
+- Record static-policy tests, exporter tests, user visual feedback, real-click tests, new-session loading and cross-client checks separately. No passing string assertion proves improved reasoning or UI parity.
+- V4.1 changes instructions and composition examples, not the retained V3 exporter. The exporter remains opt-in.
 
 ## Exporter regression tests
 
