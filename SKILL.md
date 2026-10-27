@@ -1,15 +1,27 @@
 ---
 name: cognitive-first-output
-description: Default inline cognitive-first answer design for Codex, Claude Code, and other Agents. Use for explanations, analyses, decisions, learning, diagnoses, plans, and reports. Present the complete result directly inside the current conversation with concise hierarchy, selective bold, neutral information groups and genuine native question controls only when available. Never automatically generate a separate HTML page; export only when explicitly requested.
+description: Default inline cognitive-first answer design for Codex, Claude Code, and other Agents. Use for explanations, analyses, decisions, learning, diagnoses, plans, and reports. Put a useful judgment before visual styling; present the complete result in the current conversation with restrained hierarchy, concrete boundaries and selective information groups. Use only confirmed host rendering and genuine question tools. Never automatically generate a separate HTML page; export only when explicitly requested.
 ---
 
-# Cognitive-First Output · Lay · V4
+# Cognitive-First Output · Lay · V4.1
 
 ## First priority: **the answer is the conversation**
 
 **Default result: a complete response visible in this Agent's current message.**
 
-Do not routinely create a standalone HTML file, export a JSON answer document, start a web server, insert raw HTML/CSS/JS into Markdown, open a preview tab, or send the user to an artifact link to read an ordinary answer. Even a complex answer must be fully understandable **inside the Agent conversation**.
+Do not routinely create a standalone HTML file, export a JSON answer document, start a web server, insert raw HTML/CSS/JS into ordinary Markdown, open a preview tab, or send the user to an artifact link to read an ordinary answer. Even a complex answer must be fully understandable **inside the Agent conversation**. A host-declared inline renderer protocol is not a standalone export: use it only through its exact supported wrapper and rules.
+
+## Content before decoration
+
+Before layout, identify the reader's actual decision, the evidence available, and the smallest useful judgment. Do not display this planning as a mandatory section.
+
+- **Remove-the-card test:** after removing styling, the answer must still contain a useful judgment, necessary evidence or a concrete example, and an applicable next action. A pretty container cannot compensate for empty advice.
+- Replace empty labels such as “人工确认” with an operational boundary, for example “客户说考虑一下，不等于确认采购；原文没有时间就标为待确认”. Examples are illustrative, not invented customer records.
+- Distinguish facts, judgments and hypotheses. Preserve original status, responsibility and caveats; do not create numbers or promises to make a card look complete.
+- Scale to the task. A short fact remains short. Substantive explanations use a specific example or contrast when it resolves ambiguity, not generic filler.
+- A next step must identify an action and observable completion signal; omit it for answers where no action is relevant.
+
+For user-approved composition, anti-patterns and host-specific inline rules, read [conversation composition](references/conversation-composition.md).
 
 Installing this Skill changes output decisions, **not** the UI capabilities of a Codex terminal, Claude Code, browser, IDE, or ChatGPT client. Use only genuine capabilities actually exposed by the current host. [Native surface contract](references/native-surface-contract.md) provides platform-specific routing and evaluation.
 
@@ -39,6 +51,9 @@ Installing this Skill changes output decisions, **not** the UI capabilities of a
 - Distinguish fact, inference, limitation, and recommended action. Keep evidence close to its claim.
 - Never claim Markdown sets exact font size, 14px radius, neutral background or button behavior. The host owns rendering.
 - Respect explicit output format requests, accessibility, screen reader semantics, phone readability, and platform tool instructions.
+- Compose the whole reply, not a single isolated card. Keep the opening judgment, explanatory paragraphs and bounded key object at different visual weights; do not repeat the same content both outside and inside a renderer.
+- Default to zero or one substantive gray information object for an ordinary answer. Comparisons may need paired objects; exact data may need a chart. Container count is an editorial preference, never a reason to drop essential information.
+- Use emphasis to rank meaning: one consequential phrase per short paragraph, not equal bold for every label. Let spacing group ideas; avoid report-like banners, status badges without evidence, ornamental icons and a card for each step.
 
 ## True native interaction
 

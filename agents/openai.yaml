@@ -1,7 +1,7 @@
 interface:
   display_name: "认知优先 · 对话内可视化"
-  short_description: "V4 直接在对话内清晰分层，原生交互优先，按需导出 HTML"
-  default_prompt: "Use $cognitive-first-output to answer completely in this current Agent conversation with clear visual hierarchy and only real supported native controls; do not generate a standalone HTML preview unless explicitly asked."
+  short_description: "V4.1 先有用判断，再克制排版；对话内呈现，按需导出"
+  default_prompt: "Use $cognitive-first-output to give a useful judgment, a concrete example or boundary, and only the necessary next action directly in this conversation. Keep most explanation unboxed. Use confirmed host rendering and genuine question tools; do not generate a standalone HTML preview unless explicitly asked."
   icon_small: "assets/icon.svg"
   icon_large: "assets/icon.svg"
 policy:
