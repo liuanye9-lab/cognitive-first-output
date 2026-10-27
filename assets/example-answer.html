@@ -1,0 +1,72 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>雅思阅读｜找到答案前，先把题干压缩成任务</title><style>
+:root{color-scheme:light;--ink:#171717;--body:#303030;--muted:#686868;--surface:#f6f6f6;--line:#e8e8e8;--white:#fff;--content-width:720px;--r-card:14px;--s1:4px;--s2:8px;--s3:12px;--s4:16px;--s5:24px;--s6:32px;--s7:48px}
+*{box-sizing:border-box}
+html{font-size:16px}
+body{margin:0;background:var(--white);color:var(--body);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;font-size:16px;line-height:1.75;-webkit-font-smoothing:antialiased}
+main{width:min(calc(100% - 48px),var(--content-width));margin:60px auto 96px}
+h1,h2,p{overflow-wrap:anywhere}
+h1{color:var(--ink);font-size:clamp(22px,3vw,27px);line-height:1.35;letter-spacing:-.01em;margin:0 0 var(--s5);font-weight:660}
+.lead{color:var(--ink);font-size:19px;font-weight:450;line-height:1.65;margin:0 0 var(--s4)}
+strong{font-weight:680;color:var(--ink)}
+mark{background:#ececec;color:inherit;border-radius:4px;padding:0 .12em;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.explain{font-size:16px;line-height:1.75;margin:0 0 var(--s5);white-space:pre-wrap}
+section{margin:var(--s6) 0}
+h2{color:var(--ink);font-size:17px;line-height:1.5;margin:0 0 var(--s3);font-weight:680;letter-spacing:0}
+.card,.callout{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-card);padding:4px 18px}
+.facts-row{display:grid;grid-template-columns:minmax(90px,28%) minmax(0,1fr);align-items:baseline;gap:var(--s4);padding:var(--s3) 0;border-bottom:1px solid #e6e6e6}
+.facts-row:last-child{border-bottom:0}
+.facts-label{color:var(--muted);font-size:13px;line-height:1.65}
+.facts-value{font-size:16px;font-weight:550;line-height:1.7;overflow-wrap:anywhere}
+.steps{list-style:none;margin:0;padding:0}
+.step{display:grid;grid-template-columns:27px minmax(0,1fr);column-gap:var(--s3);padding:0 0 var(--s4)}
+.step:last-child{padding-bottom:0}
+.step-num{display:flex;align-items:center;justify-content:center;width:25px;height:25px;border-radius:50%;background:var(--surface);border:1px solid var(--line);color:var(--muted);font-size:12px;font-weight:650;line-height:1}
+.step-title{color:var(--ink);font-size:16px;font-weight:650;line-height:1.6}
+.step-detail{color:var(--muted);font-size:14px;line-height:1.7;margin-top:2px}
+.paragraph{font-size:16px;line-height:1.8;white-space:pre-wrap;margin:0}
+.callout{padding:var(--s4) 18px}
+.callout-label{font-size:12px;line-height:1.6;color:var(--muted);margin:0 0 var(--s1)}
+.callout-text{margin:0;font-size:16px;line-height:1.75}
+.details{border-top:1px solid var(--line);padding-top:var(--s3)}
+.details summary{cursor:pointer;font-size:14px;color:var(--muted);padding:var(--s2) 0}
+.details p{margin:var(--s2) 0 0;font-size:15px;line-height:1.8;white-space:pre-wrap}
+.quiz{border:1px solid var(--line);border-radius:var(--r-card);padding:18px;background:var(--white)}
+.quiz-question{font-size:16px;line-height:1.75;font-weight:580;color:var(--ink);margin:0 0 var(--s3)}
+fieldset{border:0;margin:0;padding:0;min-width:0}
+legend{font-weight:450;color:var(--muted);font-size:13px;line-height:1.6;margin:0 0 var(--s2)}
+.option{display:flex;align-items:flex-start;gap:var(--s3);min-height:44px;padding:10px 8px;border:1px solid transparent;border-radius:10px;cursor:pointer;font-size:15px;line-height:1.7}
+.option:hover,.option.selected,.option:has(input:checked){background:var(--surface)}
+.option.selected,.option:has(input:checked){border-color:var(--line)}
+.option input{width:19px;height:19px;flex:none;margin:3px 0 0;accent-color:#171717}
+.option span{flex:1;overflow-wrap:anywhere}
+button{display:block;margin-top:var(--s4);min-height:44px;width:100%;border:0;background:#171717;color:#fff;border-radius:100px;padding:10px 18px;font-family:inherit;font-size:15px;font-weight:630;cursor:pointer}
+button:disabled{background:#ebebeb;color:#777;cursor:not-allowed}
+button:focus-visible,.option:focus-within,.details summary:focus-visible{outline:3px solid #266ab5;outline-offset:3px}
+.feedback{margin-top:var(--s4);border:1px solid var(--line);border-radius:12px;padding:var(--s3) var(--s4);background:var(--surface);line-height:1.75;white-space:pre-wrap;font-size:15px}
+.feedback[hidden]{display:none}
+.next{padding:var(--s4) 18px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r-card)}
+.next-label{color:var(--muted);font-size:13px;margin:0 0 var(--s1)}
+.next-text{font-size:16px;font-weight:550;margin:0;line-height:1.75}
+@media(max-width:540px){main{width:min(calc(100% - 32px),var(--content-width));margin:32px auto 64px}h1{margin-bottom:20px}.lead{font-size:18px}.card{padding:4px 14px}.facts-row{grid-template-columns:85px minmax(0,1fr);gap:12px}.quiz{padding:14px}.option{font-size:15px}}
+@media(prefers-reduced-motion:no-preference){button,.option{transition:background .14s ease}}
+</style></head><body><main><article><h1>雅思阅读｜找到答案前，先把题干压缩成任务</h1><p class="lead">定位时<mark>只记住一个任务标签</mark>；找到证据后，再进入<strong>慢思考</strong>。</p><p class="explain">你不必一边搜索原文，一边背完整题干。先决定要寻找什么，再把注意力交给原文。</p><section><h2>只留下三个信息槽</h2><div class="card"><div class="facts-row"><span class="facts-label">对象</span><span class="facts-value"><strong>scientists</strong>（科学家）</span></div><div class="facts-row"><span class="facts-label">动作</span><span class="facts-value">abandon the original theory（放弃旧理论）</span></div><div class="facts-row"><span class="facts-label">限制与目标</span><span class="facts-value"><strong>2015 年的发现之后</strong> → 为什么？</span></div></div></section><section><h2>建议你的注意力路线</h2><ol class="steps"><li class="step"><span class="step-num" aria-hidden="true">1</span><div><div class="step-title">读题干：理解任务</div><div class="step-detail">识别对象、动作、限制</div></div></li><li class="step"><span class="step-num" aria-hidden="true">2</span><div><div class="step-title">压缩题干：只保留任务标签</div><div class="step-detail">不在脑中背整句英语</div></div></li><li class="step"><span class="step-num" aria-hidden="true">3</span><div><div class="step-title">扫描原文：只负责定位</div><div class="step-detail">找到相关区间就停止搜索</div></div></li><li class="step"><span class="step-num" aria-hidden="true">4</span><div><div class="step-title">精读证据：理解原文</div><div class="step-detail">看清主干、因果与限制</div></div></li><li class="step"><span class="step-num" aria-hidden="true">5</span><div><div class="step-title">回看题干：逐项匹配</div><div class="step-detail">判断证据是否真的回答问题</div></div></li></ol></section><section><h2>关键提醒</h2><div class="callout"><p class="callout-label">先定位，再理解</p><p class="callout-text">不要一边扫原文一边在脑中完整翻译题干。<strong>定位是找区间，精读才负责判断。</strong></p></div></section><section><h2>先判断你卡在哪里</h2><div class="quiz"><p class="quiz-question">定位到原文后，如果立刻回头看题目，你通常是哪一种情况？</p><form data-choice-form><fieldset><legend>请选择最符合你的选项</legend><label class="option"><input type="radio" name="answer" value="A" data-feedback="可以优先练答案证据匹配：先用一句话复述原文，再判断题干限制。"><span>A. 能想起要找什么，也能基本读懂原文。</span></label><label class="option"><input type="radio" name="answer" value="B" data-feedback="先练关键句主干：圈谓语、识别从句，再确认原因或转折。"><span>B. 记得要找什么，却读不懂关键句。</span></label><label class="option"><input type="radio" name="answer" value="C" data-feedback="先练任务标签保持：把题干压缩成「对象＋动作＋限制」后再定位。"><span>C. 能读懂一些原文，却忘了题目问什么。</span></label></fieldset><button type="submit" disabled>提交我的情况</button><div class="feedback" data-feedback-box role="status" aria-live="polite" hidden></div></form></div></section><section><h2>为什么这样分配注意力？</h2><details class="details"><summary>展开第一性原理解释（可选阅读）</summary><p>工作记忆容量有限；将题干压缩成一个小的任务标签，能让你在切换到原文时少背几件事。注意：这只是训练假设，仍要靠限时做题和错因记录检验效果。</p></details></section><section class="next"><p class="next-label">下一步</p><p class="next-text">现在选一题，把它压缩成不超过 12 个字的中文任务标签。</p></section></article></main><script>
+document.querySelectorAll('[data-choice-form]').forEach((form)=>{
+  const submit=form.querySelector('button[type="submit"]');
+  const feedback=form.querySelector('[data-feedback-box]');
+  form.addEventListener('change',()=>{
+    submit.disabled=!form.querySelector('input[type="radio"]:checked');
+    form.querySelectorAll('.option').forEach((label)=>{
+      label.classList.toggle('selected',!!label.querySelector('input:checked'));
+    });
+    feedback.hidden=true;
+    feedback.textContent='';
+  });
+  form.addEventListener('submit',(event)=>{
+    event.preventDefault();
+    const checked=form.querySelector('input[type="radio"]:checked');
+    if(!checked)return;
+    feedback.textContent=checked.dataset.feedback||'已提交';
+    feedback.hidden=false;
+  });
+});
+</script></body></html>
