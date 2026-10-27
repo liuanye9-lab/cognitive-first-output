@@ -1,0 +1,13 @@
+interface:
+  display_name: 认知友好型可视化输出
+  short_description: "V3 双模式输出：GPT 式留白层级、浅灰卡片、局部强调和可点击选择题"
+  default_prompt: "Use $cognitive-first-output for a concise native answer and a screenshot-grounded, visually restrained standalone HTML preview for substantive tasks; never force a quiz."
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true
