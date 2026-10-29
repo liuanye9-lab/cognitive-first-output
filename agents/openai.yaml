@@ -1,7 +1,7 @@
 interface:
   display_name: "认知优先 · 对话内可视化"
-  short_description: "V4.1 先有用判断，再克制排版；对话内呈现，按需导出"
-  default_prompt: "Use $cognitive-first-output to give a useful judgment, a concrete example or boundary, and only the necessary next action directly in this conversation. Keep most explanation unboxed. Use confirmed host rendering and genuine question tools; do not generate a standalone HTML preview unless explicitly asked."
+  short_description: "V4.2 原生正文优先，信息对象按需；遵守宿主，按需导出"
+  default_prompt: "Use $cognitive-first-output for a useful judgment, necessary explanation and visible limitations in native Markdown outside the entire widget. Keep same-topic paragraphs grouped; do not force headings, bold or cards. For information objects, use a confirmed, permitted widget only for a distinct 2-5-slot information task without duplicating prose. Charts and relationship diagrams follow the owning visualization Skill's current rules when they make data or relationships clearer; the slot limit does not apply to them. Current host tokens override export proposals. Ask one question only when decision-changing and obey host restrictions before any text-choice fallback. Do not export a standalone preview unless explicitly requested."
   icon_small: "assets/icon.svg"
   icon_large: "assets/icon.svg"
 policy:

@@ -1,0 +1,72 @@
+<style>
+:root {
+  color-scheme: light;
+  --surface: #F7F7F8;
+  --text: #171717;
+  --text-muted: #52525B;
+  --border: rgba(23, 23, 23, 0.12);
+  --radius-card: 12px;
+  --spacer-12: 12px;
+  --spacer-16: 16px;
+  --font-sans: "SF Pro Text", "PingFang SC", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --text-caption: 12px/18px;
+  --text-body: 14px/20px;
+  --text-title: 16px/24px;
+}
+
+:root[data-widget-theme="dark"] {
+  color-scheme: dark;
+  --surface: #171717;
+  --text: #E5E5E5;
+  --text-muted: #A1A1AA;
+  --border: rgba(229, 229, 229, 0.12);
+}
+
+[data-dynamic-ui-widget][data-template="cognitive-first-output-trae-information-object"] {
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: fit-content(25%) minmax(0, 1fr);
+  align-items: baseline;
+  gap: var(--spacer-12) var(--spacer-16);
+  width: 100%;
+  height: auto;
+  min-width: 0;
+  margin: 0;
+  padding: var(--spacer-16);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  color: var(--text);
+  background: var(--surface);
+  font: var(--weight-regular) var(--text-body) var(--font-sans);
+}
+
+[data-dynamic-ui-widget][data-template="cognitive-first-output-trae-information-object"] > dt {
+  min-width: 0;
+  margin: 0;
+  overflow-wrap: anywhere;
+  color: var(--text-muted);
+  font: var(--weight-regular) var(--text-caption) var(--font-sans);
+}
+
+[data-dynamic-ui-widget][data-template="cognitive-first-output-trae-information-object"] > dd {
+  min-width: 0;
+  margin: 0;
+  overflow-wrap: anywhere;
+  color: var(--text);
+  font: var(--weight-regular) var(--text-body) var(--font-sans);
+}
+
+[data-dynamic-ui-widget][data-template="cognitive-first-output-trae-information-object"] > dt[data-slot="goal"] + dd {
+  font: var(--weight-medium) var(--text-body) var(--font-sans);
+}
+</style>
+<dl data-dynamic-ui-widget data-template="cognitive-first-output-trae-information-object" lang="zh-CN" aria-label="阅读层级信息对象">
+  <dt data-slot="goal">记住什么</dt>
+  <dd>先找到一个判断</dd>
+  <dt data-slot="reason">为什么</dt>
+  <dd>减少来回寻找</dd>
+  <dt data-slot="next-step">下一步</dt>
+  <dd>需要时再展开细节</dd>
+</dl>

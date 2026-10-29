@@ -1,4 +1,4 @@
-# Conversation composition · V4.1
+# Conversation composition · V4.2
 
 ## Purpose
 
@@ -23,18 +23,30 @@ This is a composition grammar, not a fixed template. Short facts may need only o
 
 For an ordinary answer, prefer **zero or one** substantive gray information object. Do not box every paragraph or stage. Avoid dashboard banners, ornamental icons, unsupported status badges and equal visual weight for unrelated information. Keep most explanation unboxed. Do not repeat the same material outside and inside a renderer.
 
+## Semantic grouping
+
+Hierarchy is not larger type, extra titles or a bold phrase in every paragraph. Rank the judgment, supporting explanation and optional object by their information role.
+
+- Keep same-topic paragraphs together when they answer the same question or support the same decision. Use normal paragraph breaks; do not insert a heading between a claim and its explanation or example.
+- Create distinct topic groups when the reader must switch to a different question, decision or action. A short content-specific heading can mark that switch; a short reply may need none.
+- Use a list for peer facts and numbering for ordered actions. Do not split every sentence into a new section, card or bold label.
+- Markdown expresses paragraphs, headings and lists, not exact paragraph or topic gaps. Extra blank lines, invisible characters and raw CSS cannot reliably set host spacing.
+
 ## Host-adapted display
 
-- Use Markdown for ordinary concise answers, or the current host's actual native components.
+- Keep the main judgment, long explanation and key limitations in native Markdown outside the entire widget. This includes long replies, not just concise answers. Supplementary detail may use a genuinely supported disclosure; required instructions and risks stay visible in native text.
+- A transparent root does not make widget prose native. Do not wrap the whole lead/reason/key-object/details reply in a renderer, even if its paragraphs are visually unboxed.
+- For information objects, use a widget only for a bounded information task with 2–5 slots, such as objects, actions and constraints or a compact comparison. Do not repeat the same material in prose and slots. Charts and relationship diagrams follow the owning visualization Skill's current rules when they make data or relationships clearer; the slot limit does not apply to them. If neither an information object nor a diagram adds clarity, use Markdown alone.
 - Use an inline renderer only if the host declares the route and the task benefits from it; read the owning visualization Skill and follow its wrapper, citation and accessibility rules.
-- In Doubao Work, the host-declared fenced start is exactly ` ```html type="renderer" ` and the end is ` ``` `, each on its own line. Ordinary raw HTML does not qualify.
-- Use a transparent, natural-height root, `width:100%`, `box-sizing:border-box`, and safe wrapping. Do not write standalone HTML files or open browser tabs just to style a chat answer.
+- In TRAE, read current `dynamic-ui` and use `PureShowWidget` only if exposed and permitted. Use its role tokens, not the standalone proposals below; do not enlarge text or spacing to compensate for compact typography. See [TRAE adapter](trae-inline-adapter.md).
+- In Doubao Work, only if the current host declares it, the fenced start is exactly ` ```html type="renderer" ` and the end is ` ``` `, each on its own line. Ordinary raw HTML does not qualify.
+- The object root uses natural height, full available width and safe wrapping under the owning renderer's rules. Do not write standalone HTML files or open browser tabs just to style a chat answer.
 - A static visible card is **not** evidence of click handling, new-session loading, native input integration or cross-client support. Native question tools remain the first choice for actual decisions.
 - Escape untrusted content. Do not interpolate user text into executable HTML, attributes or script. Static explanatory cards need no script and no fake button.
 
-## Proposed inline tokens
+## Optional standalone export proposals
 
-These are implementation proposals tuned to the user-approved sample, **not official ChatGPT CSS**, and not guarantees for host typography. Apply only when a confirmed renderer lets you control them.
+These are design proposals for explicitly requested standalone exports only, **not official ChatGPT CSS** or screenshot measurements. They do not apply to TRAE, native Markdown or another host's inline renderer. The retained V3 exporter has its own defaults; this table is an optional alternate design, not a request to change that exporter.
 
 | Element | Proposal | Purpose |
 | --- | --- | --- |
@@ -50,17 +62,17 @@ These are implementation proposals tuned to the user-approved sample, **not offi
 
 On narrow viewports, wrap rather than forcing paired columns. Important caveats cannot be reduced to unreadable metadata. Do not use color as the only status signal.
 
-## Approved direction example (illustrative)
+## Direction example (illustrative)
 
-**客户说“考虑一下”，不能被摘要改写为“已确认采购”。**
+In this fictional example, **客户说“考虑一下”，不能被摘要改写为“已确认采购”。**
 
 A short explanation should show why the distinction matters: summarization may compress wording, but must not promote an uncertain intention into a commitment.
 
-One optional gray object can hold the exact boundary:
+One optional gray object can hold only concrete status or missing fields not yet listed in the prose (2–5 slots):
 
-> “客户说考虑一下” ≠ “客户已确认采购”
+> 日期：原文未提供，待确认
 >
-> Preserve the original state. Missing dates and responsibility stay “待确认”.
+> 责任人：原文未提供，待确认
 
 A relevant next step is to check a single redacted record against the source. Completion means no added commitment, no omitted condition, and missing fields explicitly marked. This is not a real customer record.
 
@@ -76,4 +88,4 @@ Do not copy this example into unrelated topics. Transfer the content gate and rh
 - Action: where relevant, the next step has an observable completion signal.
 - Host: distinguish static policy tests, exporter regression, browser rendering, actual chat display, real interactions and cross-client tests.
 
-The user accepted this direction in the current conversation after seeing a revised sample. Further everyday use still needs feedback; static tests cannot prove universally better reasoning or aesthetic quality.
+A historical user report accepted a revised Doubao composition sample as a useful direction. It does not establish current V4.2 acceptance, actual TRAE display or cross-host compatibility. Fresh visual feedback remains separate from static tests, which cannot prove universally better reasoning or aesthetic quality.

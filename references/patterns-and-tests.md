@@ -20,25 +20,31 @@
 
 **Test:** Object/action/constraint visible in one glance on a phone.
 
-## 2. Diagnostic multiple-choice
+## 2. Diagnostic question
 
 **User:** 读原文后又忘记题干，我该怎么办？
 
-**Fast layer:** 先判断是“保持任务失败”还是“理解原文困难”。
+**Fast layer:** 先收集线索，验证“保持任务失败”或“理解原文困难”的假设。
 
-**Ask one question:**
+**Platform first:** Before presenting any options, confirm that the current host actually exposes a native question tool and permits it in the current mode. Availability alone is not permission. Choose exactly one branch:
+
+1. **Native allowed:** Use the real, permitted question tool first, with the question and choices below under its supported input contract. Do not repeat them as a text quiz.
+2. **Text allowed, no permitted native tool:** Only if the host explicitly permits text multiple-choice, show the question and A/B/C choices below and say "回复 A/B/C".
+3. **Text forbidden or permission unknown, no permitted native tool:** Ask only the open-ended question below. Do not show choices, or list them first and explain restrictions afterward.
+
+**Ask exactly one question:**
 
 “定位到原文后，如果立刻回看题目，你通常会怎样？”
+
+**Choices (native or explicitly permitted text-choice branch only):**
 
 - A. 能想起要找什么，也基本读懂原文。
 - B. 能想起要找什么，但读不懂关键句。
 - C. 读懂一些原文，却忘了题目问什么。
 
-**Platform:** Prefer real radio options with a **提交** action when supported. On text-only surfaces ask the user to reply A/B/C. No fake button.
+**After response:** A → test speed and evidence alignment; B → test sentence parsing; C → test task-label retention. Treat these as hypotheses to verify, not diagnoses from a selection. For an open-ended answer, choose a matching hypothesis or leave it unresolved; verify it with a concrete reading attempt before drawing a conclusion.
 
-**After selection:** A → speed and evidence alignment; B → sentence parsing; C → task-label retention. Mark these as tentative hypotheses.
-
-**Test:** Each option changes the next step; exactly one question; no default selection.
+**Test:** Check host availability and permission before any options; exercise native allowed, text allowed and text forbidden branches. Each rendered branch has exactly one question, no default selection or fake button; only permitted branches show choices, and every answer leads to a hypothesis to verify.
 
 ## 3. Process — attention route
 

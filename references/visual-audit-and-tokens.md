@@ -1,18 +1,29 @@
-# Screenshot-grounded visual audit · V3
+# Screenshot-grounded visual audit · V4.2
 
-Source: user-provided long screenshot `image(20261027-030734).png` (327 × 2048 screenshot pixels). It shows a ChatGPT conversation with assistant replies, soft containers, understated metadata, radio choices and dark submit buttons. The screenshot is heavily downscaled; **actual app CSS, device pixel ratio, original viewport and font metrics cannot be recovered**. Numbers below are an *implementation proposal*, not measured or official OpenAI tokens.
+Current source: user-provided `9618d255-7386-47c5-a5a4-ef68fbf415fc_e0d93876-0d97-41c6-b0f1-91901e5afe8d_image.png` (522 × 2048 screenshot pixels), observed on 2026-10-30. It supports observable structure only; **actual app CSS, device pixel ratio, original viewport and font metrics cannot be recovered**. Visible controls do not prove click handling or responses sent to an Agent.
 
-## What the screenshot visibly does
+Historical source: `image(20261027-030734).png` (327 × 2048) informed the earlier audit and portable V3 preview proposals. That historical description is not a fresh audit of the old image, a measurement of the current image or a pixel comparison between them. Numerical design proposals below are not measured or official OpenAI tokens.
 
-1. **Conversation, not slide deck.** The main text lives in one restrained central reading column; user messages sit on the right in tinted rounded bubbles. Assistant content is mostly unboxed on white.
-2. **The first glance has a clear target.** Short assertion or question appears first; heavier words are selective, not a bold wall. Large headings are unusual compared with ordinary text.
-3. **Spacing carries the hierarchy.** Lines are comfortably open; related lines sit together, unrelated topics are separated by substantially larger vertical gaps. Dividers are extremely light.
-4. **Gray is a working-memory surface.** Only coherent objects (a file card, an information summary, a decision panel) gain a very pale gray fill or a fine gray border. Long explanations remain white.
-5. **Interaction looks native.** Diagnostic answers use an actual radio group with a single full-width, rounded near-black submit control, followed by response text. A selected answer must visibly change state.
-6. **Colors are sparse.** Near-black primary ink; muted gray labels; subtle blue for user messages and occasional muted green or red for status. Meaning is also written in words.
-7. **Messages alternate between succinct and detailed.** Replies do not reuse an identical five-section template every time. The container adapts to the meaning of the content.
+## What the current screenshot visibly does
+
+1. **Conversation, not a whole-reply card.** Assistant explanations lie mostly on the white reading surface; user messages sit on the right in tinted bubbles.
+2. **Judgment precedes detail.** Replies open with a brief judgment or question and then explain. Emphasis selects meaningful phrases rather than bolding every paragraph.
+3. **Groups follow cognitive tasks.** Related explanations stay together; a different question or next action gains visible separation and sometimes a content-specific heading. The hierarchy is not just larger text.
+4. **Objects have an information task.** Pale or finely bordered groups hold linked facts such as “研究目的／研究发现／研究结论” or “目标／问题／行动／下一步”. These are observed examples, not mandatory reply columns.
+5. **Controls have visible appearance only.** Single-choice and submit styling appears alongside later replies. A single image cannot establish real clicking, script execution or input delivery.
+6. **Length varies with the task.** Short and detailed replies coexist; long explanations are not consistently inside one container. No fixed five-section template should be inferred.
+
+## Host adaptation, not CSS reconstruction
+
+- Keep judgment, long explanation and key limitations in native Markdown outside the entire widget. A transparent widget root still inherits compact type and is not a substitute for the conversation surface.
+- For information objects, use `PureShowWidget` only for a bounded 2–5-slot object that materially helps grouping, comparison or retention. Charts and relationship diagrams follow the owning visualization Skill's current rules when they make data or relationships clearer; the slot limit does not apply to them. Do not repeat the object's facts in surrounding prose.
+- Read current `dynamic-ui` tokens first. Its `--text-body` (14px/20px), `--text-title` (16px/24px maximum), spacer and radius roles govern the widget; do not enlarge them to approximate the screenshot.
+- Use normal Markdown paragraph breaks within one topic and meaningful headings/lists when switching tasks. Markdown does not set CSS gaps, font metrics, gray fills or corners.
+- Historical Doubao user reports, current screenshot observations and current host rendering tests are different evidence. None establishes current V4.2 user acceptance or cross-host parity.
 
 ## Proposed CSS tokens for the portable preview
+
+Use only for explicitly requested standalone exports, never TRAE or other inline widgets. These historical proposals explain the retained V3 preview; they do not override current host rules or request exporter changes. The alternate 20/17 typography proposal in [conversation composition](conversation-composition.md) is also export-only.
 
 | Aspect | Proposed token | Reason / test |
 | --- | --- | --- |
@@ -37,14 +48,14 @@ Suggested colors: `--ink:#171717`, `--muted:#686868`, `--surface:#f6f6f6`, `--li
 
 ## Layout grammar
 
-- **Default flow:** small context/title → 1–2-line takeaway (one marked phrase) → essential explanation → optional structured object (facts / sequence / decision) → next action.
+- **Flexible flow:** useful judgment → necessary explanation → optional information object → relevant next action. Omit irrelevant stages; do not require a title or marked phrase.
 - **Keep content unboxed unless it earns a container.** More than two strong card surfaces on an ordinary response is a warning signal, not a hard ban.
 - **No giant report heading for normal replies.** Reserve large heading/display styles for explicitly requested standalone reports.
 - **Use at most one diagnostic question per turn, only if its answer changes what the Agent would do next.** Each option needs a distinct, truthful feedback path.
 - **Responsive single column:** no forced side-by-side facts on narrow viewports; preserve reading order and generous touch zones.
-- **Inline emphasis:** `**phrase**` creates a strong phrase; `==phrase==` creates subtle light-gray inline highlight in HTML and degrades to bold in Markdown. Never use HTML from user data.
-- **Progressive disclosure:** optional native `<details>` only for supplementary explanation; never hide risk, caveat, or a required instruction.
+- **Inline emphasis:** `**phrase**` marks selective importance in Markdown. The retained optional exporter alone supports `==phrase==` as an HTML highlight degrading to bold; it is not native Markdown CSS. Never use HTML from user data.
+- **Progressive disclosure:** use a genuinely supported native disclosure only for supplementary detail. Exported HTML may use `<details>`; never assume a chat host supports it or hide a risk, caveat or required instruction.
 
 ## Evidence status and acceptance
 
-Visual observations above are grounded in the supplied image. Exact CSS tokens are **inferred proposals**. Verify by rendering the demo at 360px, 768px and 1440px widths, confirming wrap, card balance, visible focus, radio selection and state-specific feedback. Static tests alone are not browser QA. The actual ChatGPT interface has private/native renderer behavior; a portable HTML Skill can closely approximate *design principles*, but cannot guarantee pixel-identical output or native in-chat widgets in Codex/Claude Code.
+Current visual observations establish structure, not CSS or functioning controls. For an explicitly requested export, verify the preview at 360px, 768px and 1440px widths, including wrap, focus, selection and feedback. For an inline object, test the actual host separately. Static policy checks, exporter regression, browser QA, actual chat display, real interaction, new-session loading and user visual feedback are distinct evidence. A portable preview cannot guarantee pixel-identical ChatGPT output or cross-host native widgets.

@@ -1,9 +1,9 @@
 ---
 name: cognitive-first-output
-description: Default inline cognitive-first answer design for Codex, Claude Code, and other Agents. Use for explanations, analyses, decisions, learning, diagnoses, plans, and reports. Put a useful judgment before visual styling; present the complete result in the current conversation with restrained hierarchy, concrete boundaries and selective information groups. Use only confirmed host rendering and genuine question tools. Never automatically generate a separate HTML page; export only when explicitly requested.
+description: Use when explanations, analyses or decisions need cognitive-first hierarchy inside an Agent conversation. Not for standalone pages unless explicitly requested.
 ---
 
-# Cognitive-First Output · Lay · V4.1
+# Cognitive-First Output · Lay · V4.2
 
 ## First priority: **the answer is the conversation**
 
@@ -21,7 +21,7 @@ Before layout, identify the reader's actual decision, the evidence available, an
 - Scale to the task. A short fact remains short. Substantive explanations use a specific example or contrast when it resolves ambiguity, not generic filler.
 - A next step must identify an action and observable completion signal; omit it for answers where no action is relevant.
 
-For user-approved composition, anti-patterns and host-specific inline rules, read [conversation composition](references/conversation-composition.md).
+For composition, anti-patterns and host-specific inline rules, read [conversation composition](references/conversation-composition.md).
 
 Installing this Skill changes output decisions, **not** the UI capabilities of a Codex terminal, Claude Code, browser, IDE, or ChatGPT client. Use only genuine capabilities actually exposed by the current host. [Native surface contract](references/native-surface-contract.md) provides platform-specific routing and evaluation.
 
@@ -40,28 +40,34 @@ Installing this Skill changes output decisions, **not** the UI capabilities of a
 | 2–5 related facts | Real native pale-gray information group **if supported by this host** | Compact labeled list, small table or blockquote |
 | Alternatives or exact comparison | Native comparison group or short table | Labeled bullets |
 | Three or more ordered actions | Compact numbered steps; flow only when relationships need it | Numbered list |
-| Diagnostic question | Real native question tool/component when available | A/B/C text response in next turn |
+| Diagnostic question | Real native question tool/component when available and permitted | One open-ended question; A/B/C only if host rules allow |
 | Optional deep explanation | Native disclosure when available and appropriate | Small heading, paragraph, or invitation to expand |
 
 **Hierarchy rules**
 
-- Place the answer above lengthy context. Keep an ordinary response to 1–3 meaningful sections.
-- Use short paragraphs, blank lines for topic shifts, and bold for key *phrases*, not entire paragraphs.
+- Place the answer above lengthy context. Add sections only when the content needs distinct topic groups.
+- Hierarchy is meaning and reading order, not larger type or more headings. Do not force a template, a bold phrase in every paragraph, or a card for every section.
+- Keep same-topic paragraphs in one group with normal paragraph breaks. Use a small content-specific heading or separate list only when the question, decision or action changes; repeated blank lines do not create reliable CSS spacing.
+- Use bold selectively for consequential *phrases*, not whole paragraphs or every label.
 - Most explanation stays unboxed. Reserve a gray card for a bounded, memorable information object rather than decorating every section.
+- Keep the main judgment, long explanation and key limitations in native Markdown outside the entire widget. A transparent root still inherits compact widget typography; it is not native conversation text.
+- For information objects, use `PureShowWidget` in TRAE only for 2–5 related slots that materially help grouping, comparison or retention. Charts and relationship diagrams follow the owning visualization Skill's current rules when they make data or relationships clearer; the slot limit does not apply to them. Never put the whole lead/reason/key-object/details reply inside it. Read current `dynamic-ui` rules first; its typography, spacer, theme and radius tokens override all export proposals.
 - Distinguish fact, inference, limitation, and recommended action. Keep evidence close to its claim.
 - Never claim Markdown sets exact font size, 14px radius, neutral background or button behavior. The host owns rendering.
 - Respect explicit output format requests, accessibility, screen reader semantics, phone readability, and platform tool instructions.
 - Compose the whole reply, not a single isolated card. Keep the opening judgment, explanatory paragraphs and bounded key object at different visual weights; do not repeat the same content both outside and inside a renderer.
 - Default to zero or one substantive gray information object for an ordinary answer. Comparisons may need paired objects; exact data may need a chart. Container count is an editorial preference, never a reason to drop essential information.
-- Use emphasis to rank meaning: one consequential phrase per short paragraph, not equal bold for every label. Let spacing group ideas; avoid report-like banners, status badges without evidence, ornamental icons and a card for each step.
+- Use emphasis to rank meaning, not to meet a quota. Let semantic grouping organize ideas; avoid report-like banners, status badges without evidence, ornamental icons and a card for each step.
+
+For TRAE, read the [inline adapter](references/trae-inline-adapter.md) before borrowing the [information-object fragment](assets/trae-information-object.html). This resource is not a standalone page or a fixed reply template.
 
 ## True native interaction
 
-Only ask a multiple-choice question if the reply materially affects teaching, diagnosis, prioritization or implementation.
+Ask one question at a time, only if its answer changes the next action. If a safe assumption suffices, state it and proceed.
 
-1. Ask **one question** with 2–4 mutually clear options.
-2. If the current host actually offers a question input tool or rich controls, use that mechanism; follow all host-specific tool restrictions. Codex host integrations may expose request-user-input and Claude Code may expose AskUserQuestion. **Do not assume either tool exists in every session.**
-3. If no true native control is available, list options in the reply and say “回复 A/B/C”. Do not invent clickable buttons, use fake HTML forms or create a browser quiz automatically.
+1. Use a real question tool only when available, permitted in the current mode and useful. Codex host integrations may expose request-user-input and Claude Code may expose AskUserQuestion. **Do not assume either tool exists in every session.**
+2. Host tool restrictions override the A/B/C fallback. If the host forbids text multiple-choice, ask one open-ended question instead; the current TRAE Default profile requires this fallback.
+3. Only where the host permits text choices and no permitted native control is available, offer a few mutually clear options and say “回复 A/B/C”. Do not invent clickable buttons, fake HTML forms or browser quizzes.
 4. After a selection, genuinely tailor the next turn. A static HTML page cannot post a selection to an Agent chat unless separately integrated.
 5. If executing an already clear task, act without interrupting for a decorative question.
 
@@ -72,7 +78,7 @@ Before finalizing, check:
 1. **Can the user read the substantive result immediately in this message?** If no, revise.
 2. Does every visual container improve orientation or memory? If no, remove it.
 3. Am I about to make a file only because the old V3 skill said to? If yes, **do not make it**.
-4. Is a rich control confirmed in this host? If no, choose the transparent text fallback.
+4. Is a rich control confirmed and permitted in this host and mode? If no, use a permitted text fallback; do not bypass the restriction with A/B/C.
 5. Are uncertainty and evidence preserved? If no, revise.
 
 ## Optional separate HTML / Markdown exports
@@ -81,4 +87,4 @@ Before finalizing, check:
 
 The exported HTML supports pale-gray cards and local interactive single-choice feedback; this does **not** mean the HTML is embedded in Codex/Claude Code chat. Never claim pixel-identical ChatGPT rendering or automatically transmit its selection back to the Agent.
 
-For examples see [patterns and tests](references/patterns-and-tests.md). For layout inspiration see [visual audit](references/visual-audit-and-tokens.md); those approximate pixels apply to explicitly exported HTML only. For setup and acceptance tests see [install and eval](references/install-and-evals.md).
+For examples see [patterns and tests](references/patterns-and-tests.md). For observable screenshot structure see [visual audit](references/visual-audit-and-tokens.md); screenshots do not reveal official CSS. Numeric design proposals apply to explicitly exported HTML only, never TRAE widgets. For setup and acceptance tests see [install and eval](references/install-and-evals.md).

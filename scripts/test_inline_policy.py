@@ -10,7 +10,15 @@ ROOT = Path(__file__).resolve().parents[1]
 class InlineContractTests(unittest.TestCase):
     def test_skill_description_is_inline_first(self):
         src = (ROOT / "SKILL.md").read_text(encoding="utf-8")
-        self.assertIn("Default inline cognitive-first", src)
+        frontmatter = src.split("---", 2)[1]
+        description = next(line.removeprefix("description: ") for line in frontmatter.splitlines() if line.startswith("description: "))
+        self.assertIn("name: cognitive-first-output", frontmatter)
+        self.assertIn("Use when", description)
+        self.assertIn("Agent conversation", description)
+        self.assertLessEqual(len(description), 200)
+        self.assertFalse(description.startswith(('"', "'")))
+        for invalid in (": ", "<", ">", "TODO"):
+            self.assertNotIn(invalid, description)
         self.assertIn("Default result: a complete response", src)
         self.assertIn("Only if the user explicitly requests", src)
         self.assertNotIn("generate the preview by default", src.lower())
